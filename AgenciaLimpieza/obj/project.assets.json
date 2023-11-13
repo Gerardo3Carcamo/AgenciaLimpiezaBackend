@@ -2722,11 +2722,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\UADEC\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
+      "projectUniqueName": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
       "projectName": "AgenciaLimpieza",
-      "projectPath": "C:\\UADEC\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
+      "projectPath": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
       "packagesPath": "C:\\Users\\CHAVEZG\\.nuget\\packages\\",
-      "outputPath": "C:\\UADEC\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\obj\\",
+      "outputPath": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

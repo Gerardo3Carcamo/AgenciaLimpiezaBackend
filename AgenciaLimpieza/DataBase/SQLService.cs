@@ -13,9 +13,12 @@ namespace AgenciaLimpieza.DataBase
         {
             try
             {
-                
                 try
                 {
+                    if (cnx == null || cnx.State != System.Data.ConnectionState.Open)
+                    {
+                        cnx = DatabaseConnection.Instance.Connection;
+                    }
                     query = query.Trim() + "; select SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cnx);
                     if (param != null)
@@ -42,6 +45,10 @@ namespace AgenciaLimpieza.DataBase
 
         public static List<T> SelectMethod<T>(string query)
         {
+            if(cnx == null || cnx.State != System.Data.ConnectionState.Open)
+            {
+                cnx = DatabaseConnection.Instance.Connection;
+            }
             List<T> dataList = new();
             try
             {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lo7C4RZPq4iUC8xcevdp64iApTuD53NWWGqz8tuunEU6DgNax6LgGyTlWvJAnnls+3H4PLTjmPL6is3ttUNB3w==",
+  "dgSpecHash": "tzxX8RvQZPmMxIyVzlknsgb25zgJY2+Ddt2AKLrn5EsYRkeiJQofwrSJTkOWVOpxnPd2Awi2OS9y+5zwLX3xHg==",
   "success": true,
-  "projectFilePath": "C:\\UADEC\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
+  "projectFilePath": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CHAVEZG\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\CHAVEZG\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

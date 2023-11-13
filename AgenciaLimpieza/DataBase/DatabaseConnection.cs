@@ -8,7 +8,7 @@ namespace AgenciaLimpieza.DataBase
         private static readonly object _lock = new object();
         private SqlConnection _connection;
 
-        private string _connectionString = "Server=NITRO-5\\SQLEXPRESS;Database=GestionLimpieza;Trusted_Connection=True;";
+        private string _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestionLimpieza;Trusted_Connection=True;";
 
         private DatabaseConnection()
         {

@@ -1,7 +1,5 @@
-﻿using AgenciaLimpieza.Controllers.Models;
-using static AgenciaLimpieza.Controllers.Models.UsuarioModels;
+﻿using static AgenciaLimpieza.Controllers.Models.UsuarioModels;
 using AgenciaLimpieza.DataBase;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace AgenciaLimpieza.Controllers.Methods
 {
