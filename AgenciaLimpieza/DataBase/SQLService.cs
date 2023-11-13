@@ -8,11 +8,12 @@ namespace AgenciaLimpieza.DataBase
 {
     public class SQLService
     {
-        public static int InsertMethod(string query, Dictionary<string, object?>? param = null, string? connectionString = null, bool production = false)
+        static SqlConnection cnx = DatabaseConnection.Instance.Connection;
+        public static int InsertMethod(string query, Dictionary<string, object?>? param = null)
         {
             try
             {
-                SqlConnection cnx = DatabaseConnection.Instance.Connection;
+                
                 try
                 {
                     query = query.Trim() + "; select SCOPE_IDENTITY()";
@@ -42,13 +43,14 @@ namespace AgenciaLimpieza.DataBase
         public static List<T> SelectMethod<T>(string query)
         {
             List<T> dataList = new();
-            SqlConnection cnx = DatabaseConnection.Instance.Connection;
             try
             {
                 SqlCommand cmd = new SqlCommand(query, cnx);
                 cmd.CommandTimeout = 1000;
-                SqlDataReader reader = cmd.ExecuteReader();
-                dataList.AddRange(GetItems<T>(reader));
+                using(SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    dataList.AddRange(GetItems<T>(reader));
+                }
                 return dataList;
             }
             catch (Exception ex)
@@ -111,5 +113,13 @@ namespace AgenciaLimpieza.DataBase
                 yield return item;
             }
         }
+
+        //public static int UpdateMethod(string query, Dictionary<string, object> param = null)
+        //{
+        //    try
+        //    {
+
+        //    }
+        //}
     }
 }

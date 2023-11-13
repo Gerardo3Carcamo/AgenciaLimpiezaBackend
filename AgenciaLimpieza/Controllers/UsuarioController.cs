@@ -32,6 +32,20 @@ namespace AgenciaLimpieza.Controllers
             try
             {
                 var result = UsuarioMethods.Login(data);
+                return Ok(new { apiName = apiName, data = result.Auth, session = result.User?.UserID, msg = "ok", error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName = apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpGet]
+        public ActionResult GetAllUsers()
+        {
+            string apiName = "Get All Users";
+            try
+            {
+                var result = UsuarioMethods.GetAllUsers();
                 return Ok(new { apiName = apiName, data = result, msg = "ok", error = false });
             }
             catch (Exception ex)
@@ -40,5 +54,33 @@ namespace AgenciaLimpieza.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult GetAllRoles()
+        {
+            string apiName = "Get All Roles";
+            try
+            {
+                var result = UsuarioMethods.GetAllRoles();
+                return Ok(new { apiName = apiName, data = result, msg = "ok", error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName = apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpPost]
+        public ActionResult UpdateUser(RegisterUser data)
+        {
+            string apiName = "Update User";
+            try
+            {
+                var result = UsuarioMethods.UpdateUser(data);
+                return Ok(new { apiName = apiName, data = result, msg = "ok", error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName = apiName, msg = ex.Message, error = true });
+            }
+        }
     }
 }
