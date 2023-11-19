@@ -32,7 +32,8 @@ namespace AgenciaLimpieza.Controllers
             try
             {
                 var result = UsuarioMethods.Login(data);
-                return Ok(new { apiName = apiName, data = result.Auth, session = result.User?.UserID, msg = "ok", error = false });
+                return Ok(new { apiName = apiName, data = result.Auth, session = result.User?.RoleID,
+                    userID = result.User?.UserID, msg = "ok", error = false });
             }
             catch (Exception ex)
             {
@@ -75,6 +76,20 @@ namespace AgenciaLimpieza.Controllers
             try
             {
                 var result = UsuarioMethods.UpdateUser(data);
+                return Ok(new { apiName = apiName, data = result, msg = "ok", error = false });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { apiName = apiName, msg = ex.Message, error = true });
+            }
+        }
+        [HttpGet]
+        public ActionResult GetUsersWithOutCuadrilla()
+        {
+            string apiName = "Update User";
+            try
+            {
+                var result = UsuarioMethods.GetUsersWithOutCuadrilla();
                 return Ok(new { apiName = apiName, data = result, msg = "ok", error = false });
             }
             catch (Exception ex)

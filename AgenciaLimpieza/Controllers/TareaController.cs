@@ -27,7 +27,21 @@ namespace AgenciaLimpieza.Controllers
             try
             {
                 var result = TareaMethods.InsertTarea(data);
-                return Ok(new { apiName = "GetTareas", error = false, data = result, msg = "OK" });
+                return Ok(new { apiName = "InsertTarea", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetTareas" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AsignarTareasCuadrilla(Asignar data)
+        {
+            try
+            {
+                var result = TareaMethods.AsignarTareasCuadrilla(data);
+                return Ok(new { apiName = "InsertTarea", error = false, data = result, msg = "OK" });
             }
             catch (Exception ex)
             {

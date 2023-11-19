@@ -26,7 +26,13 @@ namespace AgenciaLimpieza.Controllers.Methods
 
         public static Session Login(RegisterUser data)
         {
-            string query = $@"select * from dbo.users where userMail = '{data.Email}' and userPassword = '{data.Password}'";
+            string query = $@"SELECT TOP (1000) [UserID] as UserID
+                              ,[UserName] as Name
+                              ,[UserMail] as Email
+                              ,[UserPassword] as Password
+                              ,[UserPhone] as Phone
+                              ,[RoleID] as RoleID
+                          FROM [GestionLimpieza].[dbo].[users] where userMail = '{data.Email}' and userPassword = '{data.Password}'";
             try
             {
                 List<RegisterUser> list = SQLService.SelectMethod<RegisterUser>(query);
@@ -82,6 +88,20 @@ namespace AgenciaLimpieza.Controllers.Methods
             catch (Exception ex)
             {
                 return false;
+            }
+        }
+
+        public static List<RegisterUser> GetUsersWithOutCuadrilla()
+        {
+            try
+            {
+                return SQLService.SelectMethod<RegisterUser>($@"Select u.UserID, u.UserName as Name, u.UserMail as Email, u.UserPhone as Phone, u.RoleID as RoleID from users as u 
+                                                                LEFT JOIN UserCuadrilla AS c ON u.UserID = c.UserID
+                                                                WHERE c.UserID IS NULL;");
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
 

@@ -12,5 +12,11 @@
             public string? Colonia { get; set;}
         }
 
+        public class Asignar
+        {
+            public int CuadrillaID { get; set;}
+            public int TareaID { get; set;}
+        }
+
     }
 }

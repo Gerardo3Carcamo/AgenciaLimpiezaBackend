@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj": {}
+    "A:\\Arquitectura\\Backend C#\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj": {}
   },
   "projects": {
-    "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj": {
+    "A:\\Arquitectura\\Backend C#\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
+        "projectUniqueName": "A:\\Arquitectura\\Backend C#\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
         "projectName": "AgenciaLimpieza",
-        "projectPath": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
-        "packagesPath": "C:\\Users\\CHAVEZG\\.nuget\\packages\\",
-        "outputPath": "C:\\UADEC\\Back\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\obj\\",
+        "projectPath": "A:\\Arquitectura\\Backend C#\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\AgenciaLimpieza.csproj",
+        "packagesPath": "C:\\Users\\000093883\\.nuget\\packages\\",
+        "outputPath": "A:\\Arquitectura\\Backend C#\\AgenciaLimpiezaBackend\\AgenciaLimpieza\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\CHAVEZG\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\000093883\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

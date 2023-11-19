@@ -1,37 +1,19 @@
 ﻿using System;
 using System.Data.SqlClient;
+
 namespace AgenciaLimpieza.DataBase
 {
-    public class DatabaseConnection
+    public class DatabaseConnection : IDisposable
     {
-        private static DatabaseConnection _instance;
-        private static readonly object _lock = new object();
         private SqlConnection _connection;
+        private bool _disposed = false; // Para rastrear si Dispose ha sido llamado
 
-        private string _connectionString = "Server=localhost\\SQLEXPRESS;Database=GestionLimpieza;Trusted_Connection=True;";
+        private string _connectionString = "Server=NITRO-5\\SQLEXPRESS;Database=GestionLimpieza;Trusted_Connection=True;";
 
-        private DatabaseConnection()
+        public DatabaseConnection()
         {
             _connection = new SqlConnection(_connectionString);
             _connection.Open();
-        }
-
-        public static DatabaseConnection Instance
-        {
-            get
-            {
-                lock (_lock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new DatabaseConnection();
-                    }else if(_instance._connection.State == System.Data.ConnectionState.Closed)
-                    {
-                        _instance._connection.Open();
-                    }
-                    return _instance;
-                }
-            }
         }
 
         public SqlConnection Connection
@@ -42,12 +24,37 @@ namespace AgenciaLimpieza.DataBase
             }
         }
 
-        public void CloseConnection()
+        // Implementación del método Dispose
+        protected virtual void Dispose(bool disposing)
         {
-            if (_connection.State == System.Data.ConnectionState.Open)
+            if (!_disposed)
             {
-                _connection.Close();
+                if (disposing)
+                {
+                    // Liberar recursos administrados
+                    if (_connection != null)
+                    {
+                        _connection.Close();
+                        _connection = null;
+                    }
+                }
+
+                // Aquí puedes liberar recursos no administrados si los hay
+
+                _disposed = true;
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this); // Evita que se llame al destructor
+        }
+
+        // Destructor
+        ~DatabaseConnection()
+        {
+            Dispose(false);
         }
     }
 }

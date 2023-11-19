@@ -1,24 +1,22 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
-using AgenciaLimpieza.DataBase;
-using System.Dynamic;
 using System.Diagnostics;
+using System.Linq;
+using AgenciaLimpieza.DataBase;
 
 namespace AgenciaLimpieza.DataBase
 {
     public class SQLService
     {
-        static SqlConnection cnx = DatabaseConnection.Instance.Connection;
         public static int InsertMethod(string query, Dictionary<string, object?>? param = null)
         {
-            try
+            using (DatabaseConnection dbConnection = new DatabaseConnection())
             {
                 try
                 {
-                    if (cnx == null || cnx.State != System.Data.ConnectionState.Open)
-                    {
-                        cnx = DatabaseConnection.Instance.Connection;
-                    }
+                    SqlConnection cnx = dbConnection.Connection;
                     query = query.Trim() + "; select SCOPE_IDENTITY()";
                     SqlCommand cmd = new SqlCommand(query, cnx);
                     if (param != null)
@@ -33,38 +31,32 @@ namespace AgenciaLimpieza.DataBase
                 {
                     throw;
                 }
-                finally
-                {
-                }
-            }
-            catch (Exception)
-            {
-                throw;
             }
         }
 
         public static List<T> SelectMethod<T>(string query)
         {
-            if(cnx == null || cnx.State != System.Data.ConnectionState.Open)
+            using (DatabaseConnection dbConnection = new DatabaseConnection())
             {
-                cnx = DatabaseConnection.Instance.Connection;
-            }
-            List<T> dataList = new();
-            try
-            {
-                SqlCommand cmd = new SqlCommand(query, cnx);
-                cmd.CommandTimeout = 1000;
-                using(SqlDataReader reader = cmd.ExecuteReader())
+                List<T> dataList = new();
+                try
                 {
-                    dataList.AddRange(GetItems<T>(reader));
+                    SqlConnection cnx = dbConnection.Connection;
+                    SqlCommand cmd = new SqlCommand(query, cnx);
+                    cmd.CommandTimeout = 1000;
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        dataList.AddRange(GetItems<T>(reader));
+                    }
+                    return dataList;
                 }
-                return dataList;
-            }
-            catch (Exception ex)
-            {
-                throw;
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
         }
+
         public static IEnumerable<T> GetItems<T>(SqlDataReader reader)
         {
             var properties = typeof(T).GetProperties();
@@ -79,7 +71,6 @@ namespace AgenciaLimpieza.DataBase
                 {
                     try
                     {
-
                         var columnName = property.Name.ToLower();
                         if (columnNames.ContainsKey(columnName) && !reader.IsDBNull(columnNames[columnName]))
                         {
@@ -108,8 +99,6 @@ namespace AgenciaLimpieza.DataBase
                                     property.SetValue(item, value);
                                     break;
                             }
-
-
                         }
                     }
                     catch (Exception ex)
@@ -121,12 +110,6 @@ namespace AgenciaLimpieza.DataBase
             }
         }
 
-        //public static int UpdateMethod(string query, Dictionary<string, object> param = null)
-        //{
-        //    try
-        //    {
-
-        //    }
-        //}
+        // Aquí puedes añadir otros métodos como UpdateMethod, DeleteMethod, etc.
     }
 }
