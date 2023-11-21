@@ -49,5 +49,75 @@ namespace AgenciaLimpieza.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult GetSpecificHomeworks(Asignar data)
+        {
+            try
+            {
+                var result = TareaMethods.GetSpecificHomeworks(data);
+                return Ok(new { apiName = "GetSpecificHomeworks", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetTareas" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GetSpecificHomeworksByUserID(Asignar data)
+        {
+            try
+            {
+                var result = TareaMethods.GetSpecificHomeworksByUserID(data);
+                return Ok(new { apiName = "GetSpecificHomeworksByUserID", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetSpecificHomeworksByUserID" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult MarkAsSolvedHomework(Asignar data)
+        {
+            try
+            {
+                var result = TareaMethods.MarkAsSolvedHomework(data);
+                return Ok(new { apiName = "MarkAsSolvedHomework", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetTareas" });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ChartCompletedHomeworks(Asignar data)
+        {
+            try
+            {
+                var result = TareaMethods.GetChartData(data);
+                return Ok(new { apiName = "GetChartData", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetChartData" });
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetChartDataByCuadrillas()
+        {
+            try
+            {
+                var result = TareaMethods.GetChartDataByCuadrillas();
+                return Ok(new { apiName = "GetChartDataByCuadrillas", error = false, data = result, msg = "OK" });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, msg = ex.Message, apiName = "GetChartDataByCuadrillas" });
+            }
+        }
+
     }
 }

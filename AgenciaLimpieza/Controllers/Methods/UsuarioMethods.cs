@@ -7,7 +7,7 @@ namespace AgenciaLimpieza.Controllers.Methods
     {
         public static bool InsertUser(RegisterUser data)
         {
-            string query = $@"insert into dbo.users (UserName, UserMail, UserPhone, UserPassword) values(@Name, @Email, @Phone, @Password)";
+            string query = $@"insert into dbo.users (UserName, UserMail, UserPhone, UserPassword, RoleID) values(@Name, @Email, @Phone, @Password, @RoleID)";
             try
             {
                 Dictionary<string, object> param = new Dictionary<string, object>();
@@ -15,6 +15,7 @@ namespace AgenciaLimpieza.Controllers.Methods
                 param.Add("Email", data?.Email);
                 param.Add("Phone", data?.Phone);
                 param.Add("Password", data?.Password);
+                param.Add("RoleID", 3);
                 SQLService.InsertMethod(query, param);
                 return true;
             }
