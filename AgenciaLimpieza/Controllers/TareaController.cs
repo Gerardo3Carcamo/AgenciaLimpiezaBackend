@@ -1,4 +1,5 @@
 ﻿using AgenciaLimpieza.Controllers.Methods;
+using AgenciaLimpieza.DataBase;
 using Microsoft.AspNetCore.Mvc;
 using static AgenciaLimpieza.Controllers.Models.TareaModels;
 namespace AgenciaLimpieza.Controllers
@@ -117,6 +118,40 @@ namespace AgenciaLimpieza.Controllers
             {
                 return Ok(new { error = true, msg = ex.Message, apiName = "GetChartDataByCuadrillas" });
             }
+        }
+
+        [HttpPost]
+        public ActionResult InsertImage([FromForm] IFormFile file, [FromForm] int tareaID)
+        {
+            try
+            {
+                return Ok(new { error = false, apiName = "InsertImage", msg = "Ok", data = TareaMethods.UploadImage(file, tareaID) });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = true, apiName = "InsertImage",  msg = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult GetImage(int id)
+        {
+            List<ImageModel> images = new List<ImageModel>();
+            images = SQLService.SelectMethod<ImageModel>($"Select [Data] as ImageData from IMAGES where TareaID = {id}");
+            byte[]? imageData = SQLService.SelectMethod<ImageModel>($"Select [Data] as ImageData from IMAGES where TareaID = {id}").FirstOrDefault().ImageData;  
+            string? contentType = SQLService.SelectMethod<ImageModel>($"Select [Type] as ImageData from IMAGES where TareaID = {id}").FirstOrDefault().ContentType;
+
+            if (imageData == null)
+            {
+                return NotFound();
+            }
+
+            if (string.IsNullOrWhiteSpace(contentType))
+            {
+                contentType = "image/png"; // Tipo MIME genérico para datos binarios
+            }
+
+            return File(imageData, contentType);
         }
 
     }

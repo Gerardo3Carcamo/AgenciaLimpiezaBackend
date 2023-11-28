@@ -80,7 +80,7 @@ namespace AgenciaLimpieza.Controllers.Methods
                                         from TareasAsignadas as asignada
                                         inner join Tareas as tarea on asignada.TareaID = tarea.TareaID
                                         inner join Colonias as colonia on tarea.ColoniaID = colonia.ColoniaID
-                                        where asignada.CuadrillaID = {data.CuadrillaID}";
+                                        where asignada.CuadrillaID = {data.CuadrillaID} ORDER BY tarea.tareaID";
                 List<TareasAsignadas>? list = SQLService.SelectMethod<TareasAsignadas>(query);
                 return list;
             }
@@ -152,6 +152,50 @@ namespace AgenciaLimpieza.Controllers.Methods
                 count = list.Select(x=> x.name).Count()
             };
             return dataResult;
+        }
+
+        public static bool InsertImage(ImageModel data, int id)
+        {
+            try
+            {
+                string query = @"INSERT INTO Images (Data, Type, TareaID) VALUES (@Data, @Type, @TareaID)";
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    {"Data", data.ImageData},
+                    {"Type", data.ContentType},
+                    {"TareaID", id},
+                };
+                SQLService.InsertMethod(query, parameters);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool UploadImage(IFormFile file, int id)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return false;
+                }
+                using var stream = new MemoryStream();
+                file.CopyTo(stream);
+                var image = new ImageModel
+                {
+                    ImageData = stream.ToArray(),
+                    ContentType = file.ContentType
+                };
+                var result = InsertImage(image, id);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
     }

@@ -98,7 +98,7 @@ namespace AgenciaLimpieza.Controllers.Methods
             {
                 return SQLService.SelectMethod<RegisterUser>($@"Select u.UserID, u.UserName as Name, u.UserMail as Email, u.UserPhone as Phone, u.RoleID as RoleID from users as u 
                                                                 LEFT JOIN UserCuadrilla AS c ON u.UserID = c.UserID
-                                                                WHERE c.UserID IS NULL;");
+                                                                WHERE c.UserID IS NULL and u.RoleID =! 1;");
             }
             catch (Exception ex)
             {

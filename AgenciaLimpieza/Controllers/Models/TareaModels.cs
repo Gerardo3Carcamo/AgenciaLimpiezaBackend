@@ -35,5 +35,11 @@
             public int incompleted { get; set; }
             public string? status { get; set; }
         }
+
+        public class ImageModel
+        {
+            public byte[]? ImageData { get; set; }
+            public string? ContentType { get; set; }
+        }
     }
 }
